@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <table class="table indexTB">
+        <thead>
+            <th scope="col">Symbol</th>
+            <th score="col">Company Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Share Price</th>
+            <th scope="col">Current Value</th>
+            <th scope="col" colspan="2">Trade</th>
+        </thead>
+        <tbody>
+            {% for company in index %}
+                <tr>
+                    <td>{{ company["symbol"] }}</td>
+                    <td>{{ company["name"] }}</td>
+                    <td>{{ company["shares"] }}</td>
+                    <td>{{ company["price"] | usd }}</td>
+                    <td>{{ company["total"] | usd }}</td>
+                    <td>
+                        <form   action="/buy" method="get" style="text-align: right;" value="{{ company['symbol'] }}">
+                            <button name="symbol" id="symbol" value="{{ company['symbol'] }}" class="btn btn-primary" type="submit">Buy Again</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form name="symbol" id="symbol" action="/sell" method="get" style="text-align: left;" value="{{ company['name'] }}">
+                            <button value="{{ company['name'] }}" class="btn btn-primary" type="submit">Sell</button>
+                        </form>
+                    </td>
+                    <td>
+                        <input class="form-control" id="shares" name="shares" placeholder="Amount" type="number" step="0.01" style="width: 100px;">
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4" style="font-weight: bold; text-align: right;">Cash</td>
+                <td>{{ cash | usd }}</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="font-weight: bold; text-align: right;">TOTAL</td>
+                <td>{{ net | usd }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

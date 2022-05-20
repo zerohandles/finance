@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+    <h2 style="text-decoration-line: underline;">Profile</h2>
+    <br>
+    <pre>
+        <p><b>Username:</b>         {{ user[0]["username"] }}
+
+<b>Available funds:</b>   {{ user[0]["cash"] | usd }}
+
+<B>Member since:</B>      {{ user[0]["join_date"] }}</p>
+    </pre>
+    <table class="table indexTB" style="max-width: 400px; text-align: center;">
+        <td>
+            <form action="/reset" method="get">
+                <button class="btn btn-primary" type="submit">Reset Password</button>
+            </form>
+        </td>
+        <td>
+            <form action="/addCash" method="get">
+                <button class="btn btn-primary" type="submit">Add Funds</button>
+            </form>
+        </td>
+    </table>
+{% endblock %}

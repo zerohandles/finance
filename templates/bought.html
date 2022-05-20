@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Bought
+{% endblock %}
+
+{% block main %}
+<p>You bought {{ shares }} shares of {{ name }}({{ symbol }}) for {{ total | usd }} at {{ price | usd}} per share.</p>
+<br>
+<P>Your remaining balance is {{ balance | usd }}</P>
+<form action="/" method="get">
+    <button class="btn btn-primary" type="submit">Home</button>
+</form>
+{% endblock %}

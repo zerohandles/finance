@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+<table class="table indexTB">
+    <thead>
+        <th scope="col">Symbol</th>
+        <th score="col">Company Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Type</th>
+        <th scope="col">Share Price</th>
+        <th scope="col">Date</th>
+    </thead>
+    <tbody>
+        {% for company in history %}
+            <tr>
+                <td>{{ company["symbol"] }}</td>
+                <td>{{ company["company_name"] }}</td>
+                <td>{{ company["shares"] }}</td>
+                <td>{{ company["type"] }}</td>
+                <td>{{ company["price_per_share"] | usd }}</td>
+                <td>{{ company["date"] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<form action="/" method="get">
+    <button class="btn btn-primary" type="submit">Home</button>
+</form>
+{% endblock %}

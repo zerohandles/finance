@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Fucnds
+{% endblock %}
+
+{% block main %}
+    <div class="addCash">
+        <form action="/addCash" method="POST">
+            <br>
+            <p>How much money would you like to add to your account?</p>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="cash" name="cash" placeholder="$ Amount" type="number">
+            </div>
+            <br>
+            <p>Please enter your bank routing number below.</p>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" placeholder="Routing Number" type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Add Funds</button>
+        </form>
+    </div>
+{% endblock %}
