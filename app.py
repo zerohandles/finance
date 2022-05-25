@@ -78,8 +78,7 @@ def buy():
     """Buy shares of stock"""
 
     if request.method == "GET":
-        buy = request.form.get("buy")
-        return render_template("buy.html", buy=buy)
+        return render_template("buy.html")
 
     else:
         if not request.form.get("shares").isnumeric():

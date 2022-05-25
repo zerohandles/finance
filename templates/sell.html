@@ -7,7 +7,7 @@
 {% block main %}
 <form action="/sell" method="post">
     <div class="mb-3">
-        <select class="form-select mx-auto w-auto" aria-label="Default select example" name="symbol" id="symbol">
+        <select class="form-select mx-auto w-auto active" name="symbol" id="symbol" placeholder="Select a stock">
             <option disabled selected>Select a stock</option>
             {% for company in portfolio %}
             <option name="symbol" value="{{ company.symbol }}">{{ company["name"] }}</option>
@@ -17,4 +17,14 @@
     <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Amount to sell" type="number">
     <button class="btn btn-primary" type="submit" style="padding: 5px 20px; margin-top: 15px;">Sell</button>
 </form>
+<script>
+
+    if (window.location.href != "https://zerohandles-code50-103554676-q7g4r5xxph97qx-5000.githubpreview.dev/buy") {
+         var id = window.location.href.split('=').pop();
+         document.getElementById("symbol").value = id;
+         console.log(window.location.href)
+         document.getElementById("symbol").disabled = true;
+     }
+     
+</script>
 {% endblock %}

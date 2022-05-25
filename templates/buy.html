@@ -7,11 +7,21 @@
 {% block main %}
 <form action="/buy" method="post">
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Company symbol" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Company symbol" type="text" value="">
     </div>
     <div class="mb-3">
         <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="# of shares" type="number" step="0.01">
     </div>
     <button class="btn btn-primary" type="submit">Buy</button>
 </form>
+<script>
+
+     if (window.location.href != "https://zerohandles-code50-103554676-q7g4r5xxph97qx-5000.githubpreview.dev/buy") {
+         var id = window.location.href.split('=').pop();
+         document.getElementById("symbol").value = id;
+         console.log(window.location.href)
+         document.getElementById("symbol").disabled = true;
+     }
+
+</script>
 {% endblock %}
