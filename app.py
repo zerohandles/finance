@@ -129,7 +129,7 @@ def buy():
 def history():
     """Show history of transactions"""
     # Query history database for users data
-    history = db.execute("SELECT * FROM history WHERE person_id is ?", session["user_id"])
+    history = db.execute("SELECT * FROM history WHERE person_id is ? ORDER BY date desc", session["user_id"])
 
     # If history has entries display those entries as a table
     if len(history):
@@ -248,10 +248,12 @@ def sell():
     if request.method == "GET":
         portfolio = db.execute("SELECT * FROM portfolio WHERE person_id is ?", session["user_id"])
         return render_template("sell.html", portfolio=portfolio)
+
     else:
         # If user inputs valid shares number, generate usable variables
         if float(request.form.get("shares")) > 0:
             results = lookup(request.form.get("symbol"))
+
             total = float(results["price"]) * float(request.form.get("shares"))
             cash = db.execute("SELECT cash FROM users WHERE id is ?", session["user_id"])
             name = db.execute("SELECT username FROM users WHERE id is ?", session["user_id"])

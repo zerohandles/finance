@@ -5,26 +5,34 @@
 {% endblock %}
 
 {% block main %}
-<form action="/sell" method="post">
-    <div class="mb-3">
-        <select class="form-select mx-auto w-auto active" name="symbol" id="symbol" placeholder="Select a stock">
-            <option disabled selected>Select a stock</option>
-            {% for company in portfolio %}
-            <option name="symbol" value="{{ company.symbol }}">{{ company["name"] }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Amount to sell" type="number">
-    <button class="btn btn-primary" type="submit" style="padding: 5px 20px; margin-top: 15px;">Sell</button>
-</form>
-<script>
+    <form action="/sell" method="post">
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto active" name="symbol" id="symbol" placeholder="Select a stock">
+                <option disabled selected>Select a stock</option>
+                {% for company in portfolio %}
+                <option name="symbol" value="{{ company.symbol }}">{{ company["name"] }}</option>
+                {% endfor %}
+            </select>
+            <input autocomplete="off" readOnly class="form-control mx-auto w-auto" id="locked" name="locked" type="hidden" value="">
+        </div>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Amount to sell" type="number">
+        <button class="btn btn-primary" type="submit" style="padding: 5px 20px; margin-top: 15px;" onsubmit="update()">Sell</button>
+    </form>
+    <script>
+            // If coming from the index page autofill company name field and lock it.
+        if (window.location.href != "https://zerohandles-code50-103554676-q7g4r5xxph97qx-5000.githubpreview.dev/sell") {
+            document.getElementById("symbol").style = "display: none;";
+            var id = window.location.href.split('=').pop();
+            document.getElementById("locked").type = "text";
+            let temp = id.split("+");
+            let name = "";
 
-    if (window.location.href != "https://zerohandles-code50-103554676-q7g4r5xxph97qx-5000.githubpreview.dev/buy") {
-         var id = window.location.href.split('=').pop();
-         document.getElementById("symbol").value = id;
-         console.log(window.location.href)
-         document.getElementById("symbol").disabled = true;
-     }
-     
-</script>
+            for (let i = 0; i < temp.length; i++) {
+                name = name + temp[i] + " ";
+            }
+
+            document.getElementById("locked").value = name.trim();
+            document.getElementById("symbol").value = document.getElementById("locked").value
+        }
+    </script>
 {% endblock %}
