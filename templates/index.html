@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block main %}
+    <h3 class="title">My Portfolio</h3>
+    <br>
     <table class="table indexTB">
         <thead>
             <th scope="col">Symbol</th>
@@ -34,14 +36,17 @@
                     </td>
                 </tr>
             {% endfor %}
-            <tr>
-                <td colspan="4" style="font-weight: bold; text-align: right;">Cash</td>
-                <td>{{ cash | usd }}</td>
-            </tr>
-            <tr>
-                <td colspan="4" style="font-weight: bold; text-align: right;">TOTAL</td>
-                <td>{{ net | usd }}</td>
-            </tr>
+            <tfoot>
+
+                <tr>
+                    <td colspan="4" style="font-weight: bold; text-align: right;">Cash</td>
+                    <td>{{ cash | usd }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="font-weight: bold; text-align: right;">TOTAL</td>
+                    <td>{{ net | usd }}</td>
+                </tr>
+            </tfoot>
         </tbody>
     </table>
 {% endblock %}
